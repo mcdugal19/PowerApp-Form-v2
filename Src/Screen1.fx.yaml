@@ -1,0 +1,91 @@
+Screen1 As screen:
+    Fill: =RGBA(255, 255, 255, 1)
+    
+    HeaderLabel As label:
+        Height: =60
+        Text: ="Form Title"
+        Width: =Parent.Width
+        X: =0
+        Y: =0
+        Align: =Align.Center
+        FontWeight: =FontWeight.Bold
+        Size: =24
+        Color: =RGBA(255, 255, 255, 1)
+        Fill: =RGBA(0, 120, 212, 1)
+    
+    NameLabel As label:
+        Height: =40
+        Text: ="Name:"
+        Width: =Parent.Width
+        X: =20
+        Y: =80
+        Size: =14
+        FontWeight: =FontWeight.Semibold
+    
+    NameInput As text:
+        Height: =50
+        Width: =Parent.Width - 40
+        X: =20
+        Y: =120
+        HintText: ="Enter your name"
+        Mode: =TextMode.SingleLine
+        BorderThickness: =1
+        BorderColor: =RGBA(0, 0, 0, 0.2)
+    
+    EmailLabel As label:
+        Height: =40
+        Text: ="Email:"
+        Width: =Parent.Width
+        X: =20
+        Y: =190
+        Size: =14
+        FontWeight: =FontWeight.Semibold
+    
+    EmailInput As text:
+        Height: =50
+        Width: =Parent.Width - 40
+        X: =20
+        Y: =230
+        HintText: ="Enter your email"
+        Mode: =TextMode.SingleLine
+        BorderThickness: =1
+        BorderColor: =RGBA(0, 0, 0, 0.2)
+    
+    MessageLabel As label:
+        Height: =40
+        Text: ="Message:"
+        Width: =Parent.Width
+        X: =20
+        Y: =300
+        Size: =14
+        FontWeight: =FontWeight.Semibold
+    
+    MessageInput As text:
+        Height: =150
+        Width: =Parent.Width - 40
+        X: =20
+        Y: =340
+        HintText: ="Enter your message"
+        Mode: =TextMode.MultiLine
+        BorderThickness: =1
+        BorderColor: =RGBA(0, 0, 0, 0.2)
+    
+    SubmitButton As button:
+        Height: =50
+        Width: =Parent.Width - 40
+        X: =20
+        Y: =510
+        Text: ="Submit"
+        Fill: =RGBA(0, 120, 212, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        OnSelect: =Notify("Form submitted successfully!", NotificationType.Success)
+    
+    StatusLabel As label:
+        Height: =40
+        Text: =""
+        Width: =Parent.Width
+        X: =20
+        Y: =580
+        Align: =Align.Center
+        Size: =12
+        Color: =RGBA(0, 120, 212, 1)
