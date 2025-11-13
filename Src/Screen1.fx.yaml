@@ -1,91 +1,272 @@
 Screen1 As screen:
-    Fill: =RGBA(255, 255, 255, 1)
+    Fill: =RGBA(245, 247, 250, 1)
     
-    HeaderLabel As label:
-        Height: =60
-        Text: ="Form Title"
+    HeaderGradient As rectangle:
+        Height: =120
         Width: =Parent.Width
         X: =0
         Y: =0
-        Align: =Align.Center
-        FontWeight: =FontWeight.Bold
-        Size: =24
-        Color: =RGBA(255, 255, 255, 1)
         Fill: =RGBA(0, 120, 212, 1)
     
-    NameLabel As label:
-        Height: =40
-        Text: ="Name:"
+    HeaderLabel As label:
+        Height: =80
+        Text: ="Professional Form"
         Width: =Parent.Width
-        X: =20
+        X: =0
+        Y: =20
+        Align: =Align.Center
+        FontWeight: =FontWeight.Bold
+        Size: =32
+        Color: =RGBA(255, 255, 255, 1)
+    
+    HeaderSubtitle As label:
+        Height: =30
+        Text: ="Complete the form below with your information"
+        Width: =Parent.Width
+        X: =0
         Y: =80
+        Align: =Align.Center
+        Size: =14
+        Color: =RGBA(255, 255, 255, 0.9)
+    
+    FormCard As rectangle:
+        Height: =920
+        Width: =Parent.Width - 40
+        X: =20
+        Y: =140
+        Fill: =RGBA(255, 255, 255, 1)
+        BorderColor: =RGBA(0, 0, 0, 0.1)
+        BorderThickness: =1
+    
+    NameLabel As label:
+        Height: =30
+        Text: ="Full Name *"
+        Width: =Parent.Width - 80
+        X: =40
+        Y: =160
         Size: =14
         FontWeight: =FontWeight.Semibold
+        Color: =RGBA(50, 50, 50, 1)
     
     NameInput As text:
         Height: =50
-        Width: =Parent.Width - 40
-        X: =20
-        Y: =120
-        HintText: ="Enter your name"
+        Width: =Parent.Width - 80
+        X: =40
+        Y: =190
+        HintText: ="John Doe"
         Mode: =TextMode.SingleLine
-        BorderThickness: =1
-        BorderColor: =RGBA(0, 0, 0, 0.2)
+        BorderThickness: =2
+        BorderColor: =If(IsBlank(Self.Text), RGBA(200, 200, 200, 1), RGBA(0, 120, 212, 1))
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        PaddingLeft: =15
+    
+    AutoFillButton As button:
+        Height: =36
+        Width: =120
+        X: =Parent.Width - 160
+        Y: =196
+        Text: ="Auto-Fill Demo"
+        Fill: =RGBA(76, 175, 80, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        FontSize: =11
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        OnSelect: =UpdateContext({autoFillName: "Jane Smith", autoFillEmail: "jane.smith@company.com", autoFillDept: "Engineering"}); Set(NameInput.Text, autoFillName); Set(EmailInput.Text, autoFillEmail)
     
     EmailLabel As label:
-        Height: =40
-        Text: ="Email:"
-        Width: =Parent.Width
-        X: =20
-        Y: =190
+        Height: =30
+        Text: ="Email Address *"
+        Width: =Parent.Width - 80
+        X: =40
+        Y: =260
         Size: =14
         FontWeight: =FontWeight.Semibold
+        Color: =RGBA(50, 50, 50, 1)
     
     EmailInput As text:
         Height: =50
-        Width: =Parent.Width - 40
-        X: =20
-        Y: =230
-        HintText: ="Enter your email"
-        Mode: =TextMode.SingleLine
-        BorderThickness: =1
-        BorderColor: =RGBA(0, 0, 0, 0.2)
+        Width: =Parent.Width - 80
+        X: =40
+        Y: =290
+        HintText: ="your.email@example.com"
+        Mode: =TextMode.Email
+        BorderThickness: =2
+        BorderColor: =If(IsBlank(Self.Text), RGBA(200, 200, 200, 1), RGBA(0, 120, 212, 1))
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        PaddingLeft: =15
     
-    MessageLabel As label:
-        Height: =40
-        Text: ="Message:"
-        Width: =Parent.Width
-        X: =20
-        Y: =300
+    DepartmentLabel As label:
+        Height: =30
+        Text: ="Department *"
+        Width: =Parent.Width - 80
+        X: =40
+        Y: =360
         Size: =14
         FontWeight: =FontWeight.Semibold
+        Color: =RGBA(50, 50, 50, 1)
+    
+    DepartmentDropdown As dropdown:
+        Height: =50
+        Width: =Parent.Width - 80
+        X: =40
+        Y: =390
+        Items: =["Engineering", "Marketing", "Sales", "Human Resources", "Finance", "Operations", "Customer Support"]
+        HintText: ="Select your department"
+        BorderThickness: =2
+        BorderColor: =RGBA(0, 120, 212, 1)
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        ChevronBackground: =RGBA(0, 120, 212, 1)
+        ChevronFill: =RGBA(255, 255, 255, 1)
+    
+    PreferenceLabel As label:
+        Height: =30
+        Text: ="Contact Preference *"
+        Width: =Parent.Width - 80
+        X: =40
+        Y: =460
+        Size: =14
+        FontWeight: =FontWeight.Semibold
+        Color: =RGBA(50, 50, 50, 1)
+    
+    RadioEmail As radio:
+        Height: =40
+        Width: =200
+        X: =40
+        Y: =495
+        Items: =["Email", "Phone", "Both"]
+        Default: ="Email"
+        Layout: =Layout.Horizontal
+        RadioBackgroundFill: =RGBA(255, 255, 255, 1)
+        RadioBorderColor: =RGBA(0, 120, 212, 1)
+        RadioSelectionFill: =RGBA(0, 120, 212, 1)
+    
+    PriorityLabel As label:
+        Height: =30
+        Text: ="Request Priority"
+        Width: =Parent.Width - 80
+        X: =40
+        Y: =550
+        Size: =14
+        FontWeight: =FontWeight.Semibold
+        Color: =RGBA(50, 50, 50, 1)
+    
+    PriorityRadio As radio:
+        Height: =100
+        Width: =Parent.Width - 80
+        X: =40
+        Y: =580
+        Items: =["Low - General Inquiry", "Medium - Standard Request", "High - Urgent Issue"]
+        Default: ="Medium - Standard Request"
+        Layout: =Layout.Vertical
+        RadioBackgroundFill: =RGBA(255, 255, 255, 1)
+        RadioBorderColor: =RGBA(0, 120, 212, 1)
+        RadioSelectionFill: =RGBA(0, 120, 212, 1)
+    
+    MessageLabel As label:
+        Height: =30
+        Text: ="Message *"
+        Width: =Parent.Width - 80
+        X: =40
+        Y: =700
+        Size: =14
+        FontWeight: =FontWeight.Semibold
+        Color: =RGBA(50, 50, 50, 1)
     
     MessageInput As text:
-        Height: =150
-        Width: =Parent.Width - 40
-        X: =20
-        Y: =340
-        HintText: ="Enter your message"
+        Height: =120
+        Width: =Parent.Width - 80
+        X: =40
+        Y: =730
+        HintText: ="Please provide details about your inquiry..."
         Mode: =TextMode.MultiLine
-        BorderThickness: =1
-        BorderColor: =RGBA(0, 0, 0, 0.2)
+        BorderThickness: =2
+        BorderColor: =If(IsBlank(Self.Text), RGBA(200, 200, 200, 1), RGBA(0, 120, 212, 1))
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        PaddingTop: =10
+        PaddingLeft: =15
+    
+    TermsCheckbox As checkbox:
+        Height: =40
+        Width: =Parent.Width - 80
+        X: =40
+        Y: =870
+        Text: ="I agree to the terms and conditions"
+        CheckboxBackgroundFill: =RGBA(255, 255, 255, 1)
+        CheckboxBorderColor: =RGBA(0, 120, 212, 1)
+        CheckboxFill: =RGBA(0, 120, 212, 1)
     
     SubmitButton As button:
-        Height: =50
-        Width: =Parent.Width - 40
-        X: =20
-        Y: =510
-        Text: ="Submit"
-        Fill: =RGBA(0, 120, 212, 1)
+        Height: =55
+        Width: =Parent.Width - 80
+        X: =40
+        Y: =930
+        Text: ="Submit Form"
+        Fill: =If(TermsCheckbox.Value, RGBA(0, 120, 212, 1), RGBA(150, 150, 150, 1))
+        DisabledFill: =RGBA(150, 150, 150, 1)
         Color: =RGBA(255, 255, 255, 1)
-        OnSelect: =Notify("Form submitted successfully!", NotificationType.Success)
+        FontSize: =16
+        FontWeight: =FontWeight.Bold
+        RadiusTopLeft: =8
+        RadiusTopRight: =8
+        RadiusBottomLeft: =8
+        RadiusBottomRight: =8
+        DisplayMode: =If(TermsCheckbox.Value && !IsBlank(NameInput.Text) && !IsBlank(EmailInput.Text) && !IsBlank(DepartmentDropdown.Selected.Value) && !IsBlank(MessageInput.Text), DisplayMode.Edit, DisplayMode.Disabled)
+        OnSelect: =Notify("Thank you! Your form has been submitted successfully. We'll contact you via " & RadioEmail.Selected.Value & " soon.", NotificationType.Success, 5000); Reset(NameInput); Reset(EmailInput); Reset(DepartmentDropdown); Reset(RadioEmail); Reset(PriorityRadio); Reset(MessageInput); Reset(TermsCheckbox)
     
-    StatusLabel As label:
-        Height: =40
-        Text: =""
-        Width: =Parent.Width
-        X: =20
-        Y: =580
-        Align: =Align.Center
-        Size: =12
+    ClearButton As button:
+        Height: =55
+        Width: =(Parent.Width - 100) / 2
+        X: =40
+        Y: =1000
+        Text: ="Clear Form"
+        Fill: =RGBA(255, 255, 255, 1)
         Color: =RGBA(0, 120, 212, 1)
+        BorderColor: =RGBA(0, 120, 212, 1)
+        BorderThickness: =2
+        FontSize: =14
+        RadiusTopLeft: =8
+        RadiusTopRight: =8
+        RadiusBottomLeft: =8
+        RadiusBottomRight: =8
+        OnSelect: =Reset(NameInput); Reset(EmailInput); Reset(DepartmentDropdown); Reset(RadioEmail); Reset(PriorityRadio); Reset(MessageInput); Reset(TermsCheckbox); Notify("Form cleared", NotificationType.Information)
+    
+    HelpButton As button:
+        Height: =55
+        Width: =(Parent.Width - 100) / 2
+        X: =(Parent.Width / 2) + 10
+        Y: =1000
+        Text: ="Need Help?"
+        Fill: =RGBA(255, 255, 255, 1)
+        Color: =RGBA(76, 175, 80, 1)
+        BorderColor: =RGBA(76, 175, 80, 1)
+        BorderThickness: =2
+        FontSize: =14
+        RadiusTopLeft: =8
+        RadiusTopRight: =8
+        RadiusBottomLeft: =8
+        RadiusBottomRight: =8
+        OnSelect: =Notify("For assistance, please email support@company.com or call 1-800-HELP", NotificationType.Information, 5000)
+    
+    FooterLabel As label:
+        Height: =40
+        Text: ="© 2024 Your Company. All rights reserved."
+        Width: =Parent.Width
+        X: =0
+        Y: =1070
+        Align: =Align.Center
+        Size: =11
+        Color: =RGBA(100, 100, 100, 1)
