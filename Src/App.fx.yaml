@@ -2,6 +2,9 @@ App As appinfo:
     BackEnabled: =true
     Theme: =PowerAppsTheme
     SizeBreakpoints: =[600, 900, 1200]
+    ScaleToFit: =false
+    LockAspectRatio: =false
+    LockOrientation: =false
 
     Host As hostControl.DefaultHostControlVariant:
         OnCancel: =false
