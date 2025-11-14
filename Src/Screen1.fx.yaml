@@ -1,238 +1,278 @@
 Screen1 As screen:
-    Fill: =RGBA(245, 247, 250, 1)
+    Fill: =ColorGray50
     Size: =If(App.Width < 600, ScreenSize.Small, If(App.Width < 900, ScreenSize.Medium, ScreenSize.Large))
     Orientation: =If(App.Width > App.Height, Layout.Horizontal, Layout.Vertical)
     LoadingSpinner: =LoadingSpinner.None
+    AccessibleLabel: ="Professional Form - Data Entry Screen"
     
     HeaderGradient As rectangle:
         Height: =If(App.Width < 600, 80, If(App.Width < 900, 100, 120))
         Width: =Parent.Width
         X: =0
         Y: =0
-        Fill: =RGBA(0, 120, 212, 1)
+        Fill: =ColorPrimary
     
     HeaderLabel As label:
-        Height: =If(App.Width < 600, 40, If(App.Width < 900, 50, 60))
+        Height: =If(App.Width < 600, 32, If(App.Width < 900, 40, 48))
         Text: ="Professional Form"
-        Width: =Parent.Width - 40
-        X: =20
-        Y: =If(App.Width < 600, 10, If(App.Width < 900, 15, 20))
+        Width: =Parent.Width - 32
+        X: =16
+        Y: =If(App.Width < 600, 16, If(App.Width < 900, 16, 24))
         Align: =Align.Center
         FontWeight: =FontWeight.Bold
         Size: =If(App.Width < 600, 20, If(App.Width < 900, 24, 28))
-        Color: =RGBA(255, 255, 255, 1)
+        Color: =ColorWhite
+        AccessibleLabel: ="Professional Form - Page Title"
     
     HeaderSubtitle As label:
-        Height: =If(App.Width < 600, 25, 30)
+        Height: =If(App.Width < 600, 24, 24)
         Text: ="Complete the form below with your information"
-        Width: =Parent.Width - 40
-        X: =20
-        Y: =HeaderLabel.Y + HeaderLabel.Height + 5
+        Width: =Parent.Width - 32
+        X: =16
+        Y: =HeaderLabel.Y + HeaderLabel.Height + 8
         Align: =Align.Center
-        Size: =If(App.Width < 600, 11, If(App.Width < 900, 12, 14))
+        Size: =If(App.Width < 600, 14, If(App.Width < 900, 14, 14))
         Color: =RGBA(255, 255, 255, 0.9)
+        AccessibleLabel: ="Complete the form below with your information"
     
     FormCard As rectangle:
-        Height: =Parent.Height - HeaderGradient.Height - 30
-        Width: =Min(Parent.Width - If(App.Width < 600, 20, If(App.Width < 900, 40, 60)), 900)
+        Height: =Parent.Height - HeaderGradient.Height - 32
+        Width: =Min(Parent.Width - If(App.Width < 600, 32, If(App.Width < 900, 48, 64)), 900)
         X: =(Parent.Width - Self.Width) / 2
-        Y: =HeaderGradient.Height + 15
-        Fill: =RGBA(255, 255, 255, 1)
-        BorderColor: =RGBA(0, 0, 0, 0.1)
+        Y: =HeaderGradient.Height + 16
+        Fill: =ColorWhite
+        BorderColor: =ColorBorderDefault
         BorderThickness: =1
-        RadiusTopLeft: =If(App.Width < 600, 8, 12)
-        RadiusTopRight: =If(App.Width < 600, 8, 12)
-        RadiusBottomLeft: =If(App.Width < 600, 8, 12)
-        RadiusBottomRight: =If(App.Width < 600, 8, 12)
+        RadiusTopLeft: =8
+        RadiusTopRight: =8
+        RadiusBottomLeft: =8
+        RadiusBottomRight: =8
     
     NameLabel As label:
-        Height: =If(App.Width < 600, 25, 30)
+        Height: =24
         Text: ="Full Name *"
-        Width: =FormCard.Width - If(App.Width < 600, 30, 40)
-        X: =FormCard.X + If(App.Width < 600, 15, 20)
-        Y: =FormCard.Y + 20
-        Size: =If(App.Width < 600, 12, If(App.Width < 900, 13, 14))
+        Width: =FormCard.Width - If(App.Width < 600, 32, 48)
+        X: =FormCard.X + If(App.Width < 600, 16, 24)
+        Y: =FormCard.Y + 24
+        Size: =14
         FontWeight: =FontWeight.Semibold
-        Color: =RGBA(50, 50, 50, 1)
+        Color: =ColorTextPrimary
+        AccessibleLabel: ="Full Name, required field"
     
     NameInput As text:
-        Height: =If(App.Width < 600, 45, 50)
-        Width: =If(App.Width < 600, FormCard.Width - 30, FormCard.Width - 170)
-        X: =FormCard.X + If(App.Width < 600, 15, 20)
-        Y: =NameLabel.Y + NameLabel.Height + 5
+        Height: =48
+        Width: =If(App.Width < 600, FormCard.Width - 32, FormCard.Width - 184)
+        X: =FormCard.X + If(App.Width < 600, 16, 24)
+        Y: =NameLabel.Y + NameLabel.Height + 8
         HintText: ="John Doe"
         Mode: =TextMode.SingleLine
         BorderThickness: =2
-        BorderColor: =If(IsBlank(Self.Text), RGBA(200, 200, 200, 1), RGBA(0, 120, 212, 1))
+        BorderColor: =If(IsBlank(Self.Text), ColorBorderDefault, ColorBorderFocus)
+        HoverBorderColor: =ColorBorderHover
         RadiusTopLeft: =4
         RadiusTopRight: =4
         RadiusBottomLeft: =4
         RadiusBottomRight: =4
-        PaddingLeft: =15
-        Size: =If(App.Width < 600, 13, If(App.Width < 900, 14, 16))
+        PaddingLeft: =16
+        Size: =16
+        Color: =ColorTextPrimary
+        AccessibleLabel: ="Full Name input field, required"
+        TabIndex: =1
     
     AutoFillButton As button:
-        Height: =If(App.Width < 600, 40, 45)
-        Width: =If(App.Width < 600, FormCard.Width - 30, 130)
-        X: =If(App.Width < 600, FormCard.X + 15, NameInput.X + NameInput.Width + 10)
-        Y: =If(App.Width < 600, NameInput.Y + NameInput.Height + 8, NameInput.Y + (NameInput.Height - Self.Height) / 2)
+        Height: =48
+        Width: =If(App.Width < 600, FormCard.Width - 32, 136)
+        X: =If(App.Width < 600, FormCard.X + 16, NameInput.X + NameInput.Width + 16)
+        Y: =If(App.Width < 600, NameInput.Y + NameInput.Height + 8, NameInput.Y)
         Text: ="Auto-Fill Demo"
-        Fill: =RGBA(76, 175, 80, 1)
-        Color: =RGBA(255, 255, 255, 1)
-        FontSize: =If(App.Width < 600, 11, 12)
+        Fill: =ColorSuccess
+        HoverFill: =ColorSuccessDark
+        PressedFill: =ColorSuccessDark
+        Color: =ColorWhite
+        FontSize: =14
         RadiusTopLeft: =4
         RadiusTopRight: =4
         RadiusBottomLeft: =4
         RadiusBottomRight: =4
         OnSelect: =Notify("Demo data filled", NotificationType.Information)
+        AccessibleLabel: ="Auto-fill form with demo data"
+        TabIndex: =2
     
     EmailLabel As label:
-        Height: =If(App.Width < 600, 25, 30)
+        Height: =24
         Text: ="Email Address *"
-        Width: =FormCard.Width - If(App.Width < 600, 30, 40)
-        X: =FormCard.X + If(App.Width < 600, 15, 20)
-        Y: =If(App.Width < 600, AutoFillButton.Y + AutoFillButton.Height + 20, NameInput.Y + NameInput.Height + 20)
-        Size: =If(App.Width < 600, 12, If(App.Width < 900, 13, 14))
+        Width: =FormCard.Width - If(App.Width < 600, 32, 48)
+        X: =FormCard.X + If(App.Width < 600, 16, 24)
+        Y: =If(App.Width < 600, AutoFillButton.Y + AutoFillButton.Height + 24, NameInput.Y + NameInput.Height + 24)
+        Size: =14
         FontWeight: =FontWeight.Semibold
-        Color: =RGBA(50, 50, 50, 1)
+        Color: =ColorTextPrimary
+        AccessibleLabel: ="Email Address, required field"
     
     EmailInput As text:
-        Height: =If(App.Width < 600, 45, 50)
-        Width: =FormCard.Width - If(App.Width < 600, 30, 40)
-        X: =FormCard.X + If(App.Width < 600, 15, 20)
-        Y: =EmailLabel.Y + EmailLabel.Height + 5
+        Height: =48
+        Width: =FormCard.Width - If(App.Width < 600, 32, 48)
+        X: =FormCard.X + If(App.Width < 600, 16, 24)
+        Y: =EmailLabel.Y + EmailLabel.Height + 8
         HintText: ="your.email@example.com"
         Mode: =TextMode.Email
         BorderThickness: =2
-        BorderColor: =If(IsBlank(Self.Text), RGBA(200, 200, 200, 1), RGBA(0, 120, 212, 1))
+        BorderColor: =If(IsBlank(Self.Text), ColorBorderDefault, ColorBorderFocus)
+        HoverBorderColor: =ColorBorderHover
         RadiusTopLeft: =4
         RadiusTopRight: =4
         RadiusBottomLeft: =4
         RadiusBottomRight: =4
-        PaddingLeft: =15
-        Size: =If(App.Width < 600, 13, If(App.Width < 900, 14, 16))
+        PaddingLeft: =16
+        Size: =16
+        Color: =ColorTextPrimary
+        AccessibleLabel: ="Email Address input field, required"
+        TabIndex: =3
     
     DepartmentLabel As label:
-        Height: =If(App.Width < 600, 25, 30)
+        Height: =24
         Text: ="Department *"
-        Width: =FormCard.Width - If(App.Width < 600, 30, 40)
-        X: =FormCard.X + If(App.Width < 600, 15, 20)
-        Y: =EmailInput.Y + EmailInput.Height + 20
-        Size: =If(App.Width < 600, 12, If(App.Width < 900, 13, 14))
+        Width: =FormCard.Width - If(App.Width < 600, 32, 48)
+        X: =FormCard.X + If(App.Width < 600, 16, 24)
+        Y: =EmailInput.Y + EmailInput.Height + 24
+        Size: =14
         FontWeight: =FontWeight.Semibold
-        Color: =RGBA(50, 50, 50, 1)
+        Color: =ColorTextPrimary
+        AccessibleLabel: ="Department, required field"
     
     DepartmentDropdown As dropdown:
-        Height: =If(App.Width < 600, 45, 50)
-        Width: =FormCard.Width - If(App.Width < 600, 30, 40)
-        X: =FormCard.X + If(App.Width < 600, 15, 20)
-        Y: =DepartmentLabel.Y + DepartmentLabel.Height + 5
+        Height: =48
+        Width: =FormCard.Width - If(App.Width < 600, 32, 48)
+        X: =FormCard.X + If(App.Width < 600, 16, 24)
+        Y: =DepartmentLabel.Y + DepartmentLabel.Height + 8
         Items: =["Engineering", "Marketing", "Sales", "Human Resources", "Finance", "Operations", "Customer Support"]
         HintText: ="Select your department"
         BorderThickness: =2
-        BorderColor: =RGBA(0, 120, 212, 1)
+        BorderColor: =ColorBorderFocus
+        HoverBorderColor: =ColorBorderHover
         RadiusTopLeft: =4
         RadiusTopRight: =4
         RadiusBottomLeft: =4
         RadiusBottomRight: =4
-        ChevronBackground: =RGBA(0, 120, 212, 1)
-        ChevronFill: =RGBA(255, 255, 255, 1)
-        Size: =If(App.Width < 600, 13, If(App.Width < 900, 14, 16))
+        ChevronBackground: =ColorPrimary
+        ChevronFill: =ColorWhite
+        Size: =16
+        Color: =ColorTextPrimary
+        AccessibleLabel: ="Department dropdown, required"
+        TabIndex: =4
     
     PreferenceLabel As label:
-        Height: =If(App.Width < 600, 25, 30)
+        Height: =24
         Text: ="Contact Preference *"
-        Width: =FormCard.Width - If(App.Width < 600, 30, 40)
-        X: =FormCard.X + If(App.Width < 600, 15, 20)
-        Y: =DepartmentDropdown.Y + DepartmentDropdown.Height + 20
-        Size: =If(App.Width < 600, 12, If(App.Width < 900, 13, 14))
+        Width: =FormCard.Width - If(App.Width < 600, 32, 48)
+        X: =FormCard.X + If(App.Width < 600, 16, 24)
+        Y: =DepartmentDropdown.Y + DepartmentDropdown.Height + 24
+        Size: =14
         FontWeight: =FontWeight.Semibold
-        Color: =RGBA(50, 50, 50, 1)
+        Color: =ColorTextPrimary
+        AccessibleLabel: ="Contact Preference, required field"
     
     RadioContact As radio:
-        Height: =If(App.Width < 600, 100, 45)
-        Width: =FormCard.Width - If(App.Width < 600, 30, 40)
-        X: =FormCard.X + If(App.Width < 600, 15, 20)
-        Y: =PreferenceLabel.Y + PreferenceLabel.Height + 5
+        Height: =If(App.Width < 600, 120, 48)
+        Width: =FormCard.Width - If(App.Width < 600, 32, 48)
+        X: =FormCard.X + If(App.Width < 600, 16, 24)
+        Y: =PreferenceLabel.Y + PreferenceLabel.Height + 8
         Items: =["Email", "Phone", "Both"]
         Default: ="Email"
         Layout: =If(App.Width < 600, Layout.Vertical, Layout.Horizontal)
-        RadioBackgroundFill: =RGBA(255, 255, 255, 1)
-        RadioBorderColor: =RGBA(0, 120, 212, 1)
-        RadioSelectionFill: =RGBA(0, 120, 212, 1)
-        Size: =If(App.Width < 600, 13, If(App.Width < 900, 14, 16))
+        RadioBackgroundFill: =ColorWhite
+        RadioBorderColor: =ColorPrimary
+        RadioSelectionFill: =ColorPrimary
+        Size: =16
+        Color: =ColorTextPrimary
+        AccessibleLabel: ="Contact preference options: Email, Phone, or Both"
+        TabIndex: =5
     
     PriorityLabel As label:
-        Height: =If(App.Width < 600, 25, 30)
+        Height: =24
         Text: ="Request Priority"
-        Width: =FormCard.Width - If(App.Width < 600, 30, 40)
-        X: =FormCard.X + If(App.Width < 600, 15, 20)
-        Y: =RadioContact.Y + RadioContact.Height + 20
-        Size: =If(App.Width < 600, 12, If(App.Width < 900, 13, 14))
+        Width: =FormCard.Width - If(App.Width < 600, 32, 48)
+        X: =FormCard.X + If(App.Width < 600, 16, 24)
+        Y: =RadioContact.Y + RadioContact.Height + 24
+        Size: =14
         FontWeight: =FontWeight.Semibold
-        Color: =RGBA(50, 50, 50, 1)
+        Color: =ColorTextPrimary
+        AccessibleLabel: ="Request Priority field"
     
     PriorityRadio As radio:
-        Height: =110
-        Width: =FormCard.Width - If(App.Width < 600, 30, 40)
-        X: =FormCard.X + If(App.Width < 600, 15, 20)
-        Y: =PriorityLabel.Y + PriorityLabel.Height + 5
+        Height: =120
+        Width: =FormCard.Width - If(App.Width < 600, 32, 48)
+        X: =FormCard.X + If(App.Width < 600, 16, 24)
+        Y: =PriorityLabel.Y + PriorityLabel.Height + 8
         Items: =["Low - General Inquiry", "Medium - Standard Request", "High - Urgent Issue"]
         Default: ="Medium - Standard Request"
         Layout: =Layout.Vertical
-        RadioBackgroundFill: =RGBA(255, 255, 255, 1)
-        RadioBorderColor: =RGBA(0, 120, 212, 1)
-        RadioSelectionFill: =RGBA(0, 120, 212, 1)
-        Size: =If(App.Width < 600, 12, If(App.Width < 900, 13, 14))
+        RadioBackgroundFill: =ColorWhite
+        RadioBorderColor: =ColorPrimary
+        RadioSelectionFill: =ColorPrimary
+        Size: =14
+        Color: =ColorTextPrimary
+        AccessibleLabel: ="Request priority options: Low, Medium, or High"
+        TabIndex: =6
     
     MessageLabel As label:
-        Height: =If(App.Width < 600, 25, 30)
+        Height: =24
         Text: ="Message *"
-        Width: =FormCard.Width - If(App.Width < 600, 30, 40)
-        X: =FormCard.X + If(App.Width < 600, 15, 20)
-        Y: =PriorityRadio.Y + PriorityRadio.Height + 20
-        Size: =If(App.Width < 600, 12, If(App.Width < 900, 13, 14))
+        Width: =FormCard.Width - If(App.Width < 600, 32, 48)
+        X: =FormCard.X + If(App.Width < 600, 16, 24)
+        Y: =PriorityRadio.Y + PriorityRadio.Height + 24
+        Size: =14
         FontWeight: =FontWeight.Semibold
-        Color: =RGBA(50, 50, 50, 1)
+        Color: =ColorTextPrimary
+        AccessibleLabel: ="Message, required field"
     
     MessageInput As text:
-        Height: =If(App.Width < 600, 100, 120)
-        Width: =FormCard.Width - If(App.Width < 600, 30, 40)
-        X: =FormCard.X + If(App.Width < 600, 15, 20)
-        Y: =MessageLabel.Y + MessageLabel.Height + 5
+        Height: =If(App.Width < 600, 120, 120)
+        Width: =FormCard.Width - If(App.Width < 600, 32, 48)
+        X: =FormCard.X + If(App.Width < 600, 16, 24)
+        Y: =MessageLabel.Y + MessageLabel.Height + 8
         HintText: ="Please provide details about your inquiry..."
         Mode: =TextMode.MultiLine
         BorderThickness: =2
-        BorderColor: =If(IsBlank(Self.Text), RGBA(200, 200, 200, 1), RGBA(0, 120, 212, 1))
+        BorderColor: =If(IsBlank(Self.Text), ColorBorderDefault, ColorBorderFocus)
+        HoverBorderColor: =ColorBorderHover
         RadiusTopLeft: =4
         RadiusTopRight: =4
         RadiusBottomLeft: =4
         RadiusBottomRight: =4
-        PaddingTop: =10
-        PaddingLeft: =15
-        Size: =If(App.Width < 600, 13, If(App.Width < 900, 14, 16))
+        PaddingTop: =16
+        PaddingLeft: =16
+        Size: =16
+        Color: =ColorTextPrimary
+        AccessibleLabel: ="Message input field, required"
+        TabIndex: =7
     
     TermsCheckbox As checkbox:
-        Height: =40
-        Width: =FormCard.Width - If(App.Width < 600, 30, 40)
-        X: =FormCard.X + If(App.Width < 600, 15, 20)
-        Y: =MessageInput.Y + MessageInput.Height + 20
+        Height: =48
+        Width: =FormCard.Width - If(App.Width < 600, 32, 48)
+        X: =FormCard.X + If(App.Width < 600, 16, 24)
+        Y: =MessageInput.Y + MessageInput.Height + 24
         Text: ="I agree to the terms and conditions"
-        CheckboxBackgroundFill: =RGBA(255, 255, 255, 1)
-        CheckboxBorderColor: =RGBA(0, 120, 212, 1)
-        CheckboxFill: =RGBA(0, 120, 212, 1)
-        Size: =If(App.Width < 600, 12, If(App.Width < 900, 13, 14))
+        CheckboxBackgroundFill: =ColorWhite
+        CheckboxBorderColor: =ColorPrimary
+        CheckboxFill: =ColorPrimary
+        Size: =14
+        Color: =ColorTextPrimary
+        AccessibleLabel: ="Terms and conditions checkbox, required"
+        TabIndex: =8
     
     SubmitButton As button:
-        Height: =If(App.Width < 600, 50, 55)
-        Width: =FormCard.Width - If(App.Width < 600, 30, 40)
-        X: =FormCard.X + If(App.Width < 600, 15, 20)
-        Y: =TermsCheckbox.Y + TermsCheckbox.Height + 20
+        Height: =48
+        Width: =FormCard.Width - If(App.Width < 600, 32, 48)
+        X: =FormCard.X + If(App.Width < 600, 16, 24)
+        Y: =TermsCheckbox.Y + TermsCheckbox.Height + 24
         Text: ="Submit Form"
-        Fill: =If(TermsCheckbox.Value, RGBA(0, 120, 212, 1), RGBA(150, 150, 150, 1))
-        DisabledFill: =RGBA(150, 150, 150, 1)
-        Color: =RGBA(255, 255, 255, 1)
-        FontSize: =If(App.Width < 600, 15, 16)
+        Fill: =If(TermsCheckbox.Value, ColorPrimary, ColorGray300)
+        HoverFill: =If(TermsCheckbox.Value, ColorPrimaryDark, ColorGray300)
+        PressedFill: =If(TermsCheckbox.Value, ColorPrimaryDark, ColorGray300)
+        DisabledFill: =ColorGray300
+        Color: =ColorWhite
+        FontSize: =16
         FontWeight: =FontWeight.Bold
         RadiusTopLeft: =8
         RadiusTopRight: =8
@@ -240,16 +280,20 @@ Screen1 As screen:
         RadiusBottomRight: =8
         DisplayMode: =If(TermsCheckbox.Value && !IsBlank(NameInput.Text) && !IsBlank(EmailInput.Text) && !IsBlank(DepartmentDropdown.Selected.Value) && !IsBlank(MessageInput.Text), DisplayMode.Edit, DisplayMode.Disabled)
         OnSelect: =Notify("Form submitted successfully!", NotificationType.Success, 3000); Reset(NameInput); Reset(EmailInput); Reset(DepartmentDropdown); Reset(RadioContact); Reset(PriorityRadio); Reset(MessageInput); Reset(TermsCheckbox)
+        AccessibleLabel: ="Submit form button"
+        TabIndex: =9
     
     ClearButton As button:
-        Height: =If(App.Width < 600, 50, 55)
-        Width: =If(App.Width < 600, FormCard.Width - 30, (FormCard.Width - 50) / 2)
-        X: =FormCard.X + If(App.Width < 600, 15, 20)
-        Y: =SubmitButton.Y + SubmitButton.Height + 10
+        Height: =48
+        Width: =If(App.Width < 600, FormCard.Width - 32, (FormCard.Width - 56) / 2)
+        X: =FormCard.X + If(App.Width < 600, 16, 24)
+        Y: =SubmitButton.Y + SubmitButton.Height + 16
         Text: ="Clear Form"
-        Fill: =RGBA(255, 255, 255, 1)
-        Color: =RGBA(0, 120, 212, 1)
-        BorderColor: =RGBA(0, 120, 212, 1)
+        Fill: =ColorWhite
+        HoverFill: =ColorPrimaryLight
+        PressedFill: =ColorGray200
+        Color: =ColorPrimary
+        BorderColor: =ColorPrimary
         BorderThickness: =2
         FontSize: =14
         RadiusTopLeft: =8
@@ -257,16 +301,20 @@ Screen1 As screen:
         RadiusBottomLeft: =8
         RadiusBottomRight: =8
         OnSelect: =Reset(NameInput); Reset(EmailInput); Reset(DepartmentDropdown); Reset(RadioContact); Reset(PriorityRadio); Reset(MessageInput); Reset(TermsCheckbox); Notify("Form cleared", NotificationType.Information)
+        AccessibleLabel: ="Clear all form fields"
+        TabIndex: =10
     
     HelpButton As button:
-        Height: =If(App.Width < 600, 50, 55)
-        Width: =If(App.Width < 600, FormCard.Width - 30, (FormCard.Width - 50) / 2)
-        X: =If(App.Width < 600, FormCard.X + 15, ClearButton.X + ClearButton.Width + 10)
-        Y: =If(App.Width < 600, ClearButton.Y + ClearButton.Height + 10, ClearButton.Y)
+        Height: =48
+        Width: =If(App.Width < 600, FormCard.Width - 32, (FormCard.Width - 56) / 2)
+        X: =If(App.Width < 600, FormCard.X + 16, ClearButton.X + ClearButton.Width + 8)
+        Y: =If(App.Width < 600, ClearButton.Y + ClearButton.Height + 8, ClearButton.Y)
         Text: ="Need Help?"
-        Fill: =RGBA(255, 255, 255, 1)
-        Color: =RGBA(76, 175, 80, 1)
-        BorderColor: =RGBA(76, 175, 80, 1)
+        Fill: =ColorWhite
+        HoverFill: =ColorSuccessLight
+        PressedFill: =ColorGray200
+        Color: =ColorSuccess
+        BorderColor: =ColorSuccess
         BorderThickness: =2
         FontSize: =14
         RadiusTopLeft: =8
@@ -274,13 +322,16 @@ Screen1 As screen:
         RadiusBottomLeft: =8
         RadiusBottomRight: =8
         OnSelect: =Notify("For assistance, email support@company.com", NotificationType.Information, 4000)
+        AccessibleLabel: ="Get help with this form"
+        TabIndex: =11
     
     FooterLabel As label:
-        Height: =30
+        Height: =32
         Text: ="© 2024 Your Company. All rights reserved."
         Width: =Parent.Width
         X: =0
-        Y: =Parent.Height - 35
+        Y: =Parent.Height - 40
         Align: =Align.Center
-        Size: =If(App.Width < 600, 10, 11)
-        Color: =RGBA(100, 100, 100, 1)
+        Size: =12
+        Color: =ColorTextSecondary
+        AccessibleLabel: ="Copyright 2024 Your Company. All rights reserved."
