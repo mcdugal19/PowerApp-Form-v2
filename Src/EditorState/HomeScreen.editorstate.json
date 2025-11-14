@@ -1,0 +1,219 @@
+{
+  "ControlStates": {
+    "AppIcon": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": [
+        "Icon",
+        {
+          "AFDDataSourceName": "",
+          "AutoRuleBindingEnabled": false,
+          "AutoRuleBindingString": "",
+          "InvariantPropertyName": "Icon",
+          "IsLockable": false,
+          "NameMapSourceSchema": "?"
+        },
+        "Height",
+        "Width",
+        "X",
+        "Y",
+        "Color"
+      ]
+    },
+    "ArrowIcon": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "ChipAll": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "ChipMaintenance": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "ChipQuality": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "ChipSafety": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "ClearSearchIcon": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "FilterChipsContainer": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "FooterLabel": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "FormCard": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "FormDescLabel": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "FormIcon": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "FormIconCircle": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "FormNameLabel": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "FormNumberLabel": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "FormsGallery": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": [
+        "Items",
+        {
+          "AFDDataSourceName": "",
+          "AutoRuleBindingEnabled": false,
+          "AutoRuleBindingString": "MockFormTemplates",
+          "InvariantPropertyName": "Items",
+          "IsLockable": false,
+          "NameMapSourceSchema": "?"
+        }
+      ]
+    },
+    "HeaderGradient": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "HeaderLabel": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "HeaderSubtitle": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "HomeScreen": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": [
+        "Fill",
+        "LoadingSpinner"
+      ]
+    },
+    "RequiredBadge": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "SearchContainer": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "SearchIcon": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    },
+    "SearchInput": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": [
+        "OnChange",
+        "Default"
+      ]
+    },
+    "TimeLabel": {
+      "AllowAccessToGlobals": true,
+      "ControlPropertyState": []
+    }
+  },
+  "IsLegacyAuthoring": false,
+  "OrderComponentMetadata": {},
+  "OrderComponentTemplate": {},
+  "OrderDataSource": {},
+  "OrderGroupControls": {},
+  "OrderPcfTemplate": {},
+  "OrderTemplate": {},
+  "OrderXMLTemplate": {
+    "appIcon": 1,
+    "arrowIcon": 18,
+    "chipAll": 6,
+    "chipMaintenance": 8,
+    "chipQuality": 9,
+    "chipSafety": 7,
+    "clearSearchIcon": 4,
+    "filterChipsContainer": 5,
+    "footerLabel": 19,
+    "formCard": 10,
+    "formDescLabel": 15,
+    "formIcon": 12,
+    "formIconCircle": 11,
+    "formNameLabel": 13,
+    "formNumberLabel": 14,
+    "formsGallery": 20,
+    "headerGradient": 0,
+    "headerLabel": 21,
+    "headerSubtitle": 22,
+    "homeScreen": 23,
+    "requiredBadge": 16,
+    "searchContainer": 2,
+    "searchIcon": 3,
+    "searchInput": 24,
+    "timeLabel": 17
+  },
+  "OverridablePropertiesEntry": {
+    "homeScreen": {}
+  },
+  "PCFDynamicSchemaForIRRetrievalEntry": {},
+  "PCFTemplateEntry": {},
+  "PublishOrderIndices": {
+    "AppIcon": 1,
+    "ArrowIcon": 18,
+    "ChipAll": 6,
+    "ChipMaintenance": 8,
+    "ChipQuality": 9,
+    "ChipSafety": 7,
+    "ClearSearchIcon": 4,
+    "FilterChipsContainer": 5,
+    "FooterLabel": 19,
+    "FormCard": 10,
+    "FormDescLabel": 15,
+    "FormIcon": 12,
+    "FormIconCircle": 11,
+    "FormNameLabel": 13,
+    "FormNumberLabel": 14,
+    "FormsGallery": 20,
+    "HeaderGradient": 0,
+    "HeaderLabel": 21,
+    "HeaderSubtitle": 22,
+    "HomeScreen": 23,
+    "RequiredBadge": 16,
+    "SearchContainer": 2,
+    "SearchIcon": 3,
+    "SearchInput": 24,
+    "TimeLabel": 17
+  },
+  "ResourcesJsonIndices": {},
+  "RuleScreenIdWithoutScreen": {},
+  "TemplateVersions": {},
+  "VolatileProperties": {
+    "AnalysisLoadTime": 0.0,
+    "ControlCount": {
+      "button": 4,
+      "circle": 1,
+      "gallery": 1,
+      "icon": 4,
+      "label": 8,
+      "rectangle": 4,
+      "screen": 1,
+      "text": 1
+    },
+    "DeserializationLoadTime": 0.0
+  },
+  "WasLocalDatabaseReferencesEmpty": true
+}

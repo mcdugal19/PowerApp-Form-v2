@@ -1,0 +1,364 @@
+HomeScreen As screen:
+    Fill: =RGBA(245, 247, 250, 1)
+    Size: =If(App.Width < 600, ScreenSize.Small, If(App.Width < 900, ScreenSize.Medium, ScreenSize.Large))
+    Orientation: =If(App.Width > App.Height, Layout.Horizontal, Layout.Vertical)
+    LoadingSpinner: =LoadingSpinner.None
+    OnVisible: |
+        =// Initialize search and filter
+        Set(varSearchText, "");
+        Set(varFilterCategory, "All");
+        Set(varSelectedFormTemplate, Blank())
+    
+    # ========================================
+    # HEADER SECTION
+    # ========================================
+    
+    HeaderGradient As rectangle:
+        Height: =If(App.Width < 600, 100, If(App.Width < 900, 120, 140))
+        Width: =Parent.Width
+        X: =0
+        Y: =0
+        Fill: =RGBA(0, 120, 212, 1)
+    
+    AppIcon As icon.CheckBadge:
+        Icon: =Icon.CheckBadge
+        Height: =If(App.Width < 600, 40, 50)
+        Width: =If(App.Width < 600, 40, 50)
+        X: =20
+        Y: =If(App.Width < 600, 15, 20)
+        Color: =RGBA(255, 255, 255, 1)
+    
+    HeaderLabel As label:
+        Height: =If(App.Width < 600, 35, 45)
+        Text: ="Field Technician Forms"
+        Width: =Parent.Width - AppIcon.Width - 60
+        X: =AppIcon.X + AppIcon.Width + 15
+        Y: =If(App.Width < 600, 15, 20)
+        Align: =Align.Left
+        FontWeight: =FontWeight.Bold
+        Size: =If(App.Width < 600, 22, If(App.Width < 900, 26, 30))
+        Color: =RGBA(255, 255, 255, 1)
+    
+    HeaderSubtitle As label:
+        Height: =If(App.Width < 600, 20, 25)
+        Text: ="Select a form to complete"
+        Width: =HeaderLabel.Width
+        X: =HeaderLabel.X
+        Y: =HeaderLabel.Y + HeaderLabel.Height + 5
+        Align: =Align.Left
+        Size: =If(App.Width < 600, 12, If(App.Width < 900, 14, 16))
+        Color: =RGBA(255, 255, 255, 0.9)
+    
+    # ========================================
+    # SEARCH BAR
+    # ========================================
+    
+    SearchContainer As rectangle:
+        Height: =If(App.Width < 600, 50, 60)
+        Width: =Min(Parent.Width - If(App.Width < 600, 30, 40), 900)
+        X: =(Parent.Width - Self.Width) / 2
+        Y: =HeaderGradient.Height + 15
+        Fill: =RGBA(255, 255, 255, 1)
+        BorderColor: =RGBA(0, 120, 212, 0.3)
+        BorderThickness: =1
+        RadiusTopLeft: =8
+        RadiusTopRight: =8
+        RadiusBottomLeft: =8
+        RadiusBottomRight: =8
+    
+    SearchIcon As icon.Search:
+        Icon: =Icon.Search
+        Height: =30
+        Width: =30
+        X: =SearchContainer.X + 15
+        Y: =SearchContainer.Y + (SearchContainer.Height - Self.Height) / 2
+        Color: =RGBA(100, 100, 100, 1)
+    
+    SearchInput As text:
+        Height: =SearchContainer.Height - 10
+        Width: =SearchContainer.Width - SearchIcon.Width - ClearSearchIcon.Width - 60
+        X: =SearchIcon.X + SearchIcon.Width + 10
+        Y: =SearchContainer.Y + 5
+        HintText: ="Search forms by name or number..."
+        Mode: =TextMode.SingleLine
+        BorderThickness: =0
+        Default: =varSearchText
+        OnChange: =Set(varSearchText, Self.Text)
+        Size: =If(App.Width < 600, 14, 16)
+        PaddingLeft: =5
+    
+    ClearSearchIcon As icon.Cancel:
+        Icon: =Icon.Cancel
+        Height: =25
+        Width: =25
+        X: =SearchContainer.X + SearchContainer.Width - Self.Width - 15
+        Y: =SearchContainer.Y + (SearchContainer.Height - Self.Height) / 2
+        Color: =If(!IsBlank(SearchInput.Text), RGBA(100, 100, 100, 1), RGBA(100, 100, 100, 0.3))
+        Visible: =!IsBlank(SearchInput.Text)
+        OnSelect: =Set(varSearchText, ""); Reset(SearchInput)
+    
+    # ========================================
+    # FILTER CHIPS
+    # ========================================
+    
+    FilterChipsContainer As rectangle:
+        Height: =If(App.Width < 600, 45, 50)
+        Width: =SearchContainer.Width
+        X: =SearchContainer.X
+        Y: =SearchContainer.Y + SearchContainer.Height + 15
+        Fill: =RGBA(255, 255, 255, 0)
+        BorderThickness: =0
+    
+    ChipAll As button:
+        Height: =If(App.Width < 600, 35, 40)
+        Width: =If(App.Width < 600, 70, 80)
+        X: =FilterChipsContainer.X
+        Y: =FilterChipsContainer.Y + 5
+        Text: ="All"
+        Fill: =If(varFilterCategory = "All", RGBA(0, 120, 212, 1), RGBA(255, 255, 255, 1))
+        Color: =If(varFilterCategory = "All", RGBA(255, 255, 255, 1), RGBA(0, 120, 212, 1))
+        BorderColor: =RGBA(0, 120, 212, 1)
+        BorderThickness: =2
+        FontSize: =If(App.Width < 600, 12, 14)
+        RadiusTopLeft: =20
+        RadiusTopRight: =20
+        RadiusBottomLeft: =20
+        RadiusBottomRight: =20
+        OnSelect: =Set(varFilterCategory, "All")
+    
+    ChipSafety As button:
+        Height: =ChipAll.Height
+        Width: =If(App.Width < 600, 80, 90)
+        X: =ChipAll.X + ChipAll.Width + 8
+        Y: =ChipAll.Y
+        Text: ="Safety"
+        Fill: =If(varFilterCategory = "Safety", RGBA(0, 120, 212, 1), RGBA(255, 255, 255, 1))
+        Color: =If(varFilterCategory = "Safety", RGBA(255, 255, 255, 1), RGBA(0, 120, 212, 1))
+        BorderColor: =RGBA(0, 120, 212, 1)
+        BorderThickness: =2
+        FontSize: =If(App.Width < 600, 12, 14)
+        RadiusTopLeft: =20
+        RadiusTopRight: =20
+        RadiusBottomLeft: =20
+        RadiusBottomRight: =20
+        OnSelect: =Set(varFilterCategory, "Safety")
+    
+    ChipMaintenance As button:
+        Height: =ChipAll.Height
+        Width: =If(App.Width < 600, 120, 135)
+        X: =ChipSafety.X + ChipSafety.Width + 8
+        Y: =ChipAll.Y
+        Text: ="Maintenance"
+        Fill: =If(varFilterCategory = "Maintenance", RGBA(0, 120, 212, 1), RGBA(255, 255, 255, 1))
+        Color: =If(varFilterCategory = "Maintenance", RGBA(255, 255, 255, 1), RGBA(0, 120, 212, 1))
+        BorderColor: =RGBA(0, 120, 212, 1)
+        BorderThickness: =2
+        FontSize: =If(App.Width < 600, 12, 14)
+        RadiusTopLeft: =20
+        RadiusTopRight: =20
+        RadiusBottomLeft: =20
+        RadiusBottomRight: =20
+        OnSelect: =Set(varFilterCategory, "Maintenance")
+        Visible: =App.Width >= 600
+    
+    ChipQuality As button:
+        Height: =ChipAll.Height
+        Width: =If(App.Width < 600, 85, 95)
+        X: =If(App.Width >= 600, ChipMaintenance.X + ChipMaintenance.Width + 8, ChipSafety.X + ChipSafety.Width + 8)
+        Y: =ChipAll.Y
+        Text: ="Quality"
+        Fill: =If(varFilterCategory = "Quality", RGBA(0, 120, 212, 1), RGBA(255, 255, 255, 1))
+        Color: =If(varFilterCategory = "Quality", RGBA(255, 255, 255, 1), RGBA(0, 120, 212, 1))
+        BorderColor: =RGBA(0, 120, 212, 1)
+        BorderThickness: =2
+        FontSize: =If(App.Width < 600, 12, 14)
+        RadiusTopLeft: =20
+        RadiusTopRight: =20
+        RadiusBottomLeft: =20
+        RadiusBottomRight: =20
+        OnSelect: =Set(varFilterCategory, "Quality")
+    
+    # ========================================
+    # FORMS GALLERY
+    # ========================================
+    
+    FormsGallery As gallery.galleryVertical:
+        Height: =Parent.Height - FilterChipsContainer.Y - FilterChipsContainer.Height - 80
+        Width: =SearchContainer.Width
+        X: =SearchContainer.X
+        Y: =FilterChipsContainer.Y + FilterChipsContainer.Height + 15
+        TemplatePadding: =8
+        TemplateSize: =If(App.Width < 600, 120, 130)
+        Items: |
+            =// Mock data for now - will connect to Dataverse later
+            Table(
+                {
+                    FormName: "Daily Safety Inspection",
+                    FormNumber: "SF-001",
+                    Description: "Required daily safety checklist for all field technicians",
+                    Category: "Safety",
+                    IconName: "Shield",
+                    IconColor: "#107C10",
+                    EstimatedTime: 15,
+                    IsRequired: true
+                },
+                {
+                    FormName: "Equipment Maintenance Check",
+                    FormNumber: "MF-001",
+                    Description: "Regular maintenance inspection for field equipment",
+                    Category: "Maintenance",
+                    IconName: "Wrench",
+                    IconColor: "#0078D4",
+                    EstimatedTime: 20,
+                    IsRequired: false
+                },
+                {
+                    FormName: "Incident Report",
+                    FormNumber: "IR-001",
+                    Description: "Report any safety incidents or near-misses",
+                    Category: "Safety",
+                    IconName: "Warning",
+                    IconColor: "#D13438",
+                    EstimatedTime: 10,
+                    IsRequired: false
+                },
+                {
+                    FormName: "Quality Control Inspection",
+                    FormNumber: "QC-001",
+                    Description: "Quality assurance checklist for completed work",
+                    Category: "Quality",
+                    IconName: "Checkmark",
+                    IconColor: "#107C10",
+                    EstimatedTime: 12,
+                    IsRequired: true
+                },
+                {
+                    FormName: "Pre-Operational Checklist",
+                    FormNumber: "PC-001",
+                    Description: "Verify equipment is ready before starting work",
+                    Category: "Safety",
+                    IconName: "CircleRing",
+                    IconColor: "#FFA500",
+                    EstimatedTime: 8,
+                    IsRequired: true
+                }
+            )
+        
+        FormCard As rectangle:
+            Height: =Parent.TemplateHeight - 16
+            Width: =Parent.TemplateWidth - 16
+            X: =8
+            Y: =8
+            Fill: =RGBA(255, 255, 255, 1)
+            BorderColor: =If(Self.Pressed, RGBA(0, 120, 212, 1), RGBA(0, 0, 0, 0.1))
+            BorderThickness: =If(Self.Pressed, 2, 1)
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            OnSelect: |
+                =Set(varSelectedFormTemplate, ThisItem);
+                // Navigate based on form type
+                Switch(
+                    ThisItem.FormNumber,
+                    "SF-001", Navigate(Screen1, ScreenTransition.Fade),
+                    Notify("Form screen not yet created: " & ThisItem.FormName, NotificationType.Information)
+                )
+        
+        FormIconCircle As circle:
+            Height: =If(App.Width < 600, 50, 60)
+            Width: =If(App.Width < 600, 50, 60)
+            X: =FormCard.X + 15
+            Y: =FormCard.Y + (FormCard.Height - Self.Height) / 2
+            Fill: =ColorValue(ThisItem.IconColor & "20")
+            BorderColor: =ColorValue(ThisItem.IconColor)
+            BorderThickness: =2
+        
+        FormIcon As icon.Shield:
+            Icon: =Switch(
+                ThisItem.IconName,
+                "Shield", Icon.Shield,
+                "Wrench", Icon.Wrench,
+                "Warning", Icon.Warning,
+                "Checkmark", Icon.Checkmark,
+                "CircleRing", Icon.CircleRing,
+                Icon.Document
+            )
+            Height: =If(App.Width < 600, 30, 35)
+            Width: =If(App.Width < 600, 30, 35)
+            X: =FormIconCircle.X + (FormIconCircle.Width - Self.Width) / 2
+            Y: =FormIconCircle.Y + (FormIconCircle.Height - Self.Height) / 2
+            Color: =ColorValue(ThisItem.IconColor)
+        
+        FormNameLabel As label:
+            Height: =If(App.Width < 600, 40, 45)
+            Text: =ThisItem.FormName
+            Width: =FormCard.Width - FormIconCircle.Width - ArrowIcon.Width - 50
+            X: =FormIconCircle.X + FormIconCircle.Width + 15
+            Y: =FormCard.Y + 10
+            Size: =If(App.Width < 600, 14, 16)
+            FontWeight: =FontWeight.Semibold
+            Color: =RGBA(50, 50, 50, 1)
+        
+        FormNumberLabel As label:
+            Height: =20
+            Text: =ThisItem.FormNumber
+            Width: =FormNameLabel.Width
+            X: =FormNameLabel.X
+            Y: =FormNameLabel.Y + FormNameLabel.Height
+            Size: =If(App.Width < 600, 11, 12)
+            Color: =RGBA(100, 100, 100, 1)
+        
+        FormDescLabel As label:
+            Height: =If(App.Width < 600, 30, 35)
+            Text: =ThisItem.Description
+            Width: =FormNameLabel.Width
+            X: =FormNameLabel.X
+            Y: =FormNumberLabel.Y + FormNumberLabel.Height + 5
+            Size: =If(App.Width < 600, 10, 11)
+            Color: =RGBA(120, 120, 120, 1)
+        
+        TimeLabel As label:
+            Height: =20
+            Text: =ThisItem.EstimatedTime & " min"
+            Width: =80
+            X: =FormCard.X + FormCard.Width - Self.Width - ArrowIcon.Width - 25
+            Y: =FormCard.Y + FormCard.Height - Self.Height - 10
+            Size: =10
+            Align: =Align.Right
+            Color: =RGBA(100, 100, 100, 1)
+            FontWeight: =FontWeight.Semibold
+        
+        RequiredBadge As label:
+            Height: =22
+            Text: ="REQUIRED"
+            Width: =80
+            X: =FormNameLabel.X
+            Y: =FormCard.Y + FormCard.Height - Self.Height - 10
+            Size: =9
+            Align: =Align.Center
+            FontWeight: =FontWeight.Bold
+            Color: =RGBA(209, 52, 56, 1)
+            Visible: =ThisItem.IsRequired
+        
+        ArrowIcon As icon.ChevronRight:
+            Icon: =Icon.ChevronRight
+            Height: =30
+            Width: =30
+            X: =FormCard.X + FormCard.Width - Self.Width - 10
+            Y: =FormCard.Y + (FormCard.Height - Self.Height) / 2
+            Color: =RGBA(0, 120, 212, 1)
+    
+    # ========================================
+    # FOOTER
+    # ========================================
+    
+    FooterLabel As label:
+        Height: =30
+        Text: ="© 2024 Field Technician Forms System"
+        Width: =Parent.Width
+        X: =0
+        Y: =Parent.Height - 35
+        Align: =Align.Center
+        Size: =If(App.Width < 600, 10, 11)
+        Color: =RGBA(100, 100, 100, 1)

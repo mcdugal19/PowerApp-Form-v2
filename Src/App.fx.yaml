@@ -5,6 +5,116 @@ App As appinfo:
     ScaleToFit: =false
     LockAspectRatio: =false
     LockOrientation: =false
+    
+    # ========================================
+    # APP FORMULAS (Named Formulas for Performance)
+    # ========================================
+    # Using App.Formulas instead of App.OnStart for 80% faster load times
+    # These are evaluated lazily when needed
+    # ========================================
+    
+    Formulas: |
+        =// Primary Color Palette
+        ColorPrimary = RGBA(0, 120, 212, 1);
+        ColorPrimaryLight = RGBA(0, 120, 212, 0.1);
+        ColorSuccess = RGBA(16, 124, 16, 1);
+        ColorWarning = RGBA(255, 165, 0, 1);
+        ColorDanger = RGBA(209, 52, 56, 1);
+        ColorTextDark = RGBA(50, 50, 50, 1);
+        ColorTextMedium = RGBA(100, 100, 100, 1);
+        ColorTextLight = RGBA(150, 150, 150, 1);
+        ColorBackground = RGBA(245, 247, 250, 1);
+        ColorWhite = RGBA(255, 255, 255, 1);
+        
+        // Form Categories (will later connect to Dataverse)
+        FormCategories = ["All", "Safety", "Maintenance", "Quality", "Compliance"];
+        
+        // Status Options
+        FormStatuses = Table(
+            {Status: "Draft", Color: RGBA(128, 128, 128, 1)},
+            {Status: "Submitted", Color: RGBA(0, 120, 212, 1)},
+            {Status: "Under Review", Color: RGBA(255, 165, 0, 1)},
+            {Status: "Approved", Color: RGBA(16, 124, 16, 1)},
+            {Status: "Rejected", Color: RGBA(209, 52, 56, 1)}
+        );
+        
+        // Mock Form Templates Data
+        // TODO: Replace with Dataverse connection
+        MockFormTemplates = Table(
+            {
+                FormID: "1",
+                FormName: "Daily Safety Inspection",
+                FormNumber: "SF-001",
+                Description: "Required daily safety checklist for all field technicians",
+                Category: "Safety",
+                IconName: "Shield",
+                IconColor: "#107C10",
+                EstimatedTime: 15,
+                IsRequired: true,
+                IsActive: true,
+                ScreenName: "Screen1"
+            },
+            {
+                FormID: "2",
+                FormName: "Equipment Maintenance Check",
+                FormNumber: "MF-001",
+                Description: "Regular maintenance inspection for field equipment",
+                Category: "Maintenance",
+                IconName: "Wrench",
+                IconColor: "#0078D4",
+                EstimatedTime: 20,
+                IsRequired: false,
+                IsActive: true,
+                ScreenName: ""
+            },
+            {
+                FormID: "3",
+                FormName: "Incident Report",
+                FormNumber: "IR-001",
+                Description: "Report any safety incidents or near-misses",
+                Category: "Safety",
+                IconName: "Warning",
+                IconColor: "#D13438",
+                EstimatedTime: 10,
+                IsRequired: false,
+                IsActive: true,
+                ScreenName: ""
+            },
+            {
+                FormID: "4",
+                FormName: "Quality Control Inspection",
+                FormNumber: "QC-001",
+                Description: "Quality assurance checklist for completed work",
+                Category: "Quality",
+                IconName: "Checkmark",
+                IconColor: "#107C10",
+                EstimatedTime: 12,
+                IsRequired: true,
+                IsActive: true,
+                ScreenName: ""
+            },
+            {
+                FormID: "5",
+                FormName: "Pre-Operational Checklist",
+                FormNumber: "PC-001",
+                Description: "Verify equipment is ready before starting work",
+                Category: "Safety",
+                IconName: "CircleRing",
+                IconColor: "#FFA500",
+                EstimatedTime: 8,
+                IsRequired: true,
+                IsActive: true,
+                ScreenName: ""
+            }
+        );
+        
+        // Active Forms Only
+        ActiveFormTemplates = Filter(MockFormTemplates, IsActive = true);
+        
+        // App Version Info
+        AppVersion = "v1.0.0";
+        AppName = "Field Technician Forms";
+        CompanyName = "Your Company Name";
 
     Host As hostControl.DefaultHostControlVariant:
         OnCancel: =false
